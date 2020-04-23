@@ -21,6 +21,7 @@ const getters = {
 
 // actions
 const actions = {
+    // eslint-disable-next-line no-unused-vars
     async login({commit, state}, {email, password}) {
         let loginResponse = await api.auth.login({email, password})
         let loginIsSuccess = !!loginResponse.data.token
