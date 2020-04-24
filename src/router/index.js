@@ -7,9 +7,21 @@ const router = new VueRouter({
     mode: 'history',
     linkExactActiveClass: "bg-light",
     routes: [
+        {
+            path: '/',
+            name: 'Main',
+            components: require('../components/layouts/MainLayout'),
+            children: [
+                {
+                    path: '',
+                    name: 'home',
+                    component: require('../views/home').default,
+                }
+            ]
+        },
         //Guest routes
         {
-            path: '',
+            path: '/',
             name: 'Guess',
             components: require('../components/layouts/GuessLayout'),
             children: [
@@ -20,11 +32,6 @@ const router = new VueRouter({
                 }
             ]
         },
-        {
-            path: '/',
-            name: 'home',
-            component: require('../views/home').default,
-        }
     ]
 });
 router.beforeEach((to, from, next) => {

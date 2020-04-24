@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Header/>
         <router-view/>
         <Footer/>
     </div>
@@ -7,10 +8,11 @@
 
 <script>
     import Footer from "./Footer";
+    import Header from "./Header";
 
     export default {
         name: "GuessLayout",
-        components: {Footer}
+        components: {Header, Footer}
     }
 </script>
 
