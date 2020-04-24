@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios from '../plugins/axios';
 
 export default {
 
     login(data) {
-        return axios.post('api/token/', data)
+        return axios.post('api/login/', data)
             .then((response) => Promise.resolve(response))
             .catch((error) => Promise.reject(error))
     },

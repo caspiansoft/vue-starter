@@ -10,6 +10,7 @@ const router = new VueRouter({
         {
             path: '/',
             name: 'Main',
+            meta: {requiresAuth: true},
             components: require('../components/layouts/MainLayout'),
             children: [
                 {
@@ -38,7 +39,7 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
         // this route requires auth, check if logged in
         // if not, redirect to login page.
-        if (!store.getters.isAuth) {
+        if (!store.getters['auth/isAuth']) {
             next({
                 path: '/login'
             })

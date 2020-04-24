@@ -5,7 +5,7 @@ import {LOGIN_SUCCESS} from "../types";
 // shape: [{ id, quantity }]
 const state = {
     user: null,
-    isAuth: false,
+    isAuth: !!localStorage.getItem('access_token'),
 };
 
 // getters
@@ -23,14 +23,17 @@ const getters = {
 const actions = {
     // eslint-disable-next-line no-unused-vars
     async login({commit, state}, {email, password}) {
-        let loginResponse = await api.auth.login({email, password})
-        let loginIsSuccess = !!loginResponse.data.token
-        localStorage.setItem('token', loginIsSuccess.data.token)
-        commit(LOGIN_SUCCESS, loginResponse.data)
+        let loginResponse = await api.auth.login({email, password});
+        let loginIsSuccess = !!loginResponse.data.token;
+        console.log(loginResponse);
+        localStorage.setItem('access_token', loginResponse.data.token);
+        commit(LOGIN_SUCCESS, loginIsSuccess)
+
+        return Promise.resolve(loginIsSuccess)
     },
     // TODO: - other auth actions here (register, forgetPassword ...)
 
-}
+};
 
 // mutations
 const mutations = {

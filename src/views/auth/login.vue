@@ -1,12 +1,12 @@
 <template>
     <div class="flex-container">
-        <form method="post">
+        <form @submit.prevent="login">
             <div class="container">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
+                <label for="email"><b>Username</b></label>
+                <input id="email" type="email" placeholder="Enter Username" v-model="email" required>
 
                 <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+                <input id="psw" type="password" placeholder="Enter Password" v-model="password" required>
 
                 <button type="submit">Login</button>
                 <br/>
@@ -21,7 +21,19 @@
 <script>
     export default {
         name: "login",
-        components: {}
+        data() {
+            return {
+                email: '',
+                password: ''
+            }
+        },
+        components: {},
+        methods: {
+            login() {
+                this.$store.dispatch('auth/login', {email: this.email, password: this.password})
+                this.$router.push('/')
+            }
+        }
     }
 </script>
 
@@ -37,7 +49,7 @@
     }
 
     /* Full-width inputs */
-    input[type=text], input[type=password] {
+    input[type=text], input[type=password], input[type=email] {
         width: 100%;
         padding: 12px 20px;
         margin: 8px 0;
